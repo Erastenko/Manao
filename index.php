@@ -10,7 +10,8 @@
   <a>Password</a> <input type="text" size="40">
   
   
-  <p><input type="submit" value="Input"> </p>
+  
+  <p><input type="submit" value="Inpu t"> </p>
  </form>
 
 <input type="submit" value="Registration">
