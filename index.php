@@ -11,11 +11,12 @@
   
   
   
-  <p><input type="submit" value="Inpu t"> </p>
+  <p><input type="submit" value="Input"> </p>
  </form>
 
+<form name="registration" method="post" action="registration.php">
 <input type="submit" value="Registration">
-
+</form>
 
  </div>
 
