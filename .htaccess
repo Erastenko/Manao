@@ -1,0 +1,6 @@
+AddDefaultCharset UTF-8
+DirectoryIndex index.php
+
+<Files  acction.js>
+    deny from all
+</Files>

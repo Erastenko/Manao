@@ -12,8 +12,6 @@ function __construct($login, $password, $email,$name)
 }
 
 }
-echo "PIDOR";
-
 
 
 ?>

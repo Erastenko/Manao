@@ -1,26 +1,26 @@
+<!DOCTYPE HTML>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php include 'links.php'; ?>
+</head>
+
+<body>
 
 
-<div class="">
- <form name="test" method="post" action="user.php">
- 
-  <br>
-  <a>Login</a> <input type="text" size="40">
-     
-  <br><br>
-  <a>Password</a> <input type="text" size="40">
-  
-  
-  
-  <p><input type="submit" value="Input"> </p>
+<form action="input.php">
+  <p><button type="submit">Input</button></p>
  </form>
 
-<form name="registration" method="post" action="registration.php">
-<input type="submit" value="Registration">
-</form>
+ <form action="registration.php">
+  <p><button type="submit">Registration</button></p>
+ </form>
 
- </div>
 
-<?php
-$index=55;
-?>
+ 
+</body>
+</html>
+
+
+
+
 
