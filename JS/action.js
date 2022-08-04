@@ -17,7 +17,7 @@ if (button_input != null) { //Input
 		let password_messeng = document.getElementById('info_password');
 		login_messeng.innerHTML = " ";
 		password_messeng.innerHTML = " ";
-		fetch('/authorization.php/?login=' + login_data + '&&password=' + password_data)
+		fetch('\authorization.php\?login=' + login_data + '&&password=' + password_data)
 			.then(
 				response => {
 					return response.text();
@@ -32,7 +32,7 @@ if (button_input != null) { //Input
 					}
 
 					if (text.includes('Enter')) {
-						window.location = "/";
+						window.location = "\index.php";
 					}
 
 				}
@@ -64,7 +64,7 @@ if (button_registration != null) {
 			login_messeng.innerHTML =
 			password_messeng.innerHTML = email_messeng.innerHTML = name_messeng.innerHTML = '';
 		if (password_data == password_confirm) {
-			fetch('/registration.php/?login=' + login_data + '&&password=' + password_data + '&&email=' + email_data + '&&name=' + name_data)
+			fetch('\registration.php\?login=' + login_data + '&&password=' + password_data + '&&email=' + email_data + '&&name=' + name_data)
 				.then(
 					response => {
 						return response.text();
@@ -97,7 +97,7 @@ if (button_registration != null) {
 						}
 
 						if (text.includes('Regist')) {
-							window.location = "/";
+							window.location = "\index.php";
 						}
 
 					}
