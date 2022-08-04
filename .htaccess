@@ -1,6 +1,10 @@
 AddDefaultCharset UTF-8
 DirectoryIndex index.php
 
-<Files  acction.js>
+<Files  bd.json>
     deny from all
 </Files>
+<Files  crud.php>
+    deny from all
+</Files>
+

@@ -1,34 +1,64 @@
-
- <?php include 'links.php'; ?>
-  <div class="first_box" id="first_box">
-
- <form name="test" >
- 
-  <br>
-  <a>Login</a> <input type="text" size="10"  id="login_form" > <a id="login_messeng"></a>
-     
-  <br><br>
-  <a>Password</a> <input type="password" size="10"   id="password_form"> <a id="info_password"></a>
-
-  <br><br>
-  <a>confirm Password</a> <input   type="password" size="10"  id="password_confirm_form"> <a id="info_confirm_password"></a>
-  <br><br>
-  <a>email</a> <input type="text" size="20"id="email_form"> <a id="info_email"></a>
-  <br><br>
-  <a>name</a> <input type="text"   size="10">
-
- </form>
- <p><button type="submit" value="Registration" id="button_registration">Registration</button> </p>
+<?php 
+include 'crud.php';
+ $login=$_GET['login'];
+ $password=$_GET['password'];
+ $email=$_GET['email'];
+ $name=$_GET['name'];
 
 
- <form action="input.php">
-  <p><button type="submit">Input</button></p>
- </form>
+if(((check_login($login))==true)&&(check_password($password)==true)&&(check_email($email)==true)&&(check_name($name)==true))
+{
+  Insert($login, $password, $email,$name);
+  echo 'Regist';
+}
 
-<?php
+function check_login ($login){
 
+  $login= trim($login," ");
+  if( (preg_match("/ /",$login))||(6<=strlen($login))==false||(0==strlen($login))==true){
+  echo "Not a valid login";
+  }elseif((Select_login($login))!=true){
+    return 1;
+    }
+  else{
+    echo "Login exists";
+    return 0;
+  }
+}
 
+function check_password ($password){
+  $password= trim($password," ");
+  
+  if ((((preg_match("/[^\w]/", $password))==false)&&((preg_match("/[^\d]/", $password))!=false)&&((preg_match("/[^a-zA-Z]/", $password))!=false)
+  &&((preg_match("/[^\S]/", $password))==false))||((6>=strlen($password))==true&&(0<=strlen($password))==false))
+  {
+    return 1;
+  }else{
+    echo "Not a valid password";
+    return 0;
+  }
+  
+}
 
-?>
+function check_email($email){
+  if (preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+.[a-zA-Z.]{2,5}$/", $email)==false) {
+      echo "Not a valid email address";
+      return 0;
+    }
+    elseif((Select_email($email))!=true){
+      return 1;
+      }
+    else{
+      echo "Email exists";
+      return 0;
+    }
+}
 
-  </div>
+function check_name($name){
+  if (preg_match("/^[a-zA-Z]{2}$/", $name)==false) {
+      echo "Not a valid name";
+    }
+    else{
+      return true;
+    }
+}

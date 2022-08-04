@@ -1,5 +1,18 @@
-div.first_box
+#first_box
 {
 color: brown;
 background-color: bisque;
+width:400px;
+position:absolute;
+left:50%;
+top:50%;
+margin:-100px 0 0 -150px;
+}
+#name{
+background-color: rgb(204, 198, 190);
+width:400px;
+position:absolute;
+left:50%;
+top:30%;
+margin:-100px 0 0 -150px;
 }

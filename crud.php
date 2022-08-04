@@ -12,28 +12,66 @@ function Insert($login, $password, $email,$name){
     $data = json_decode($data);
     
     array_push($data, $People);
+    $data=json_encode($data);
+    file_put_contents('bd.json',$data);
 
-    file_put_contents('bd.json',json_encode($data));
-
+     session_start();
+     $_SESSION['user'] = $name;
+     return 1;
 }
 
-function Select($login, $password){
+function Select_login($login){
 
     $data = file_get_contents('bd.json');
     $data = json_decode($data);
 
+    if(empty( $data )==false){
     foreach($data as $result) {
       
           if($result->login==$login)
-          if($result->password == md5($password.$result->name)) {
-                //если всёё хорошо запускаем сесию и переходим на  HOME  страницу
-              break;
-          }{
-              //вывод что что не верно
+          {
+            return 1;
           }
-      }
-
-
+        }
+    }else return 0;
 }
 
-?>
+function Select_email($email){
+
+    $data = file_get_contents('bd.json');
+    $data = json_decode($data);
+
+    if(empty( $data )==false){
+    foreach($data as $result) {
+      
+          if($result->email==$email)
+          {
+            return 1;
+          }
+        }
+    }else return 0;
+}
+
+function Select_password($login,$password){
+
+    $data = file_get_contents('bd.json');
+    $data = json_decode($data);
+
+    if(empty( $data )==false){
+    foreach($data as $result) {
+      
+          if($result->login==$login)
+          {
+            if((md5($password.$result->name))== ($result->password)){
+
+                session_start();
+                $_SESSION['user'] = $result->name;
+
+                return 1;
+            }
+          }
+
+        }
+    }else return 0;
+
+}
