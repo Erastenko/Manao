@@ -1,77 +1,80 @@
 <?php
-include 'user.php';
+include_once 'json_function.php';
+include_once 'user.php';
 
-function Insert($login, $password, $email,$name){
+class Crud
+{
 
+  public function Insert($login, $password, $email, $name)
+  {
+    $new_password = md5($password . $name);
 
-    $new_password=md5($password.$name);
+    $People = new User($login, $new_password, $email, $name);
 
-    $People=new User($login, $new_password, $email,$name);
-    
-    $data = file_get_contents('bd.json');
-    $data = json_decode($data);
-    
+    $json = new JSON();
+    $data = $json->read_json();
+
     array_push($data, $People);
-    $data=json_encode($data);
-    file_put_contents('bd.json',$data);
 
-     session_start();
-     $_SESSION['user'] = $name;
-     return 1;
-}
+    $json->write_json($data);
 
-function Select_login($login){
+    session_start();
+    $_SESSION['user'] = $name;
+    return 1;
+  }
 
-    $data = file_get_contents('bd.json');
-    $data = json_decode($data);
+  public function Select_login($login)
+  {
 
-    if(empty( $data )==false){
-    foreach($data as $result) {
-      
-          if($result->login==$login)
-          {
+    $json = new JSON();
+    $data = $json->read_json();
+
+    if (empty($data) == false) {
+      foreach ($data as $result) {
+
+        if ($result->login == $login) {
+          return 1;
+        }
+      }
+    } else return 0;
+  }
+
+
+  public function Select_email($email)
+  {
+
+    $json = new JSON();
+    $data = $json->read_json();
+
+    if (empty($data) == false) {
+      foreach ($data as $result) {
+
+        if ($result->email == $email) {
+          return 1;
+        }
+      }
+    } else return 0;
+  }
+
+  public function Select_password($login, $password)
+  {
+
+    $json = new JSON();
+    $data = $json->read_json();
+
+    if (empty($data) == false) {
+      foreach ($data as $result) {
+
+        if ($result->login == $login) {
+          if ((md5($password . $result->name)) == ($result->password)) {
+
+            session_start();
+            $_SESSION['user'] = $result->name;
+
             return 1;
           }
         }
-    }else return 0;
-}
-
-function Select_email($email){
-
-    $data = file_get_contents('bd.json');
-    $data = json_decode($data);
-
-    if(empty( $data )==false){
-    foreach($data as $result) {
-      
-          if($result->email==$email)
-          {
-            return 1;
-          }
-        }
-    }else return 0;
-}
-
-function Select_password($login,$password){
-
-    $data = file_get_contents('bd.json');
-    $data = json_decode($data);
-
-    if(empty( $data )==false){
-    foreach($data as $result) {
-      
-          if($result->login==$login)
-          {
-            if((md5($password.$result->name))== ($result->password)){
-
-                session_start();
-                $_SESSION['user'] = $result->name;
-
-                return 1;
-            }
-          }
-
-        }
-    }else return 0;
-
+      }
+    } else return 0;
+  }
 }
